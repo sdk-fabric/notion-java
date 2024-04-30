@@ -1,0 +1,9 @@
+{
+  "type": "client-java",
+  "require": {
+    "sdkfabric/notion": {
+      "target": "./src/main/java/org/sdkfabric/notion",
+      "namespace": "org.sdkfabric.notion"
+    }
+  }
+}
