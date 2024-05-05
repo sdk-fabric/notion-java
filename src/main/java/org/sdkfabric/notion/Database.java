@@ -7,12 +7,13 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import java.time.LocalDateTime;
 import java.util.List;
 public class Database {
     private String object;
     private String id;
-    private String createdTime;
-    private String lastEditedTime;
+    private LocalDateTime createdTime;
+    private LocalDateTime lastEditedTime;
     private DatabaseIcon icon;
     private DatabaseCover cover;
     private String url;
@@ -35,19 +36,19 @@ public class Database {
         return this.id;
     }
     @JsonSetter("created_time")
-    public void setCreatedTime(String createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
     @JsonGetter("created_time")
-    public String getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return this.createdTime;
     }
     @JsonSetter("last_edited_time")
-    public void setLastEditedTime(String lastEditedTime) {
+    public void setLastEditedTime(LocalDateTime lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
     }
     @JsonGetter("last_edited_time")
-    public String getLastEditedTime() {
+    public LocalDateTime getLastEditedTime() {
         return this.lastEditedTime;
     }
     @JsonSetter("icon")
