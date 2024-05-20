@@ -18,9 +18,11 @@ public class Page {
     private User lastEditedBy;
     private String cover;
     private String icon;
-    private String parent;
+    private Object parent;
     private Boolean inTrash;
     private Map<String, Object> properties;
+    private String url;
+    private String publicUrl;
     @JsonSetter("object")
     public void setObject(String object) {
         this.object = object;
@@ -86,11 +88,11 @@ public class Page {
         return this.icon;
     }
     @JsonSetter("parent")
-    public void setParent(String parent) {
+    public void setParent(Object parent) {
         this.parent = parent;
     }
     @JsonGetter("parent")
-    public String getParent() {
+    public Object getParent() {
         return this.parent;
     }
     @JsonSetter("in_trash")
@@ -108,5 +110,21 @@ public class Page {
     @JsonGetter("properties")
     public Map<String, Object> getProperties() {
         return this.properties;
+    }
+    @JsonSetter("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    @JsonGetter("url")
+    public String getUrl() {
+        return this.url;
+    }
+    @JsonSetter("public_url")
+    public void setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+    @JsonGetter("public_url")
+    public String getPublicUrl() {
+        return this.publicUrl;
     }
 }
