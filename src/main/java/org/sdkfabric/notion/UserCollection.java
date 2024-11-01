@@ -7,17 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.util.List;
 public class UserCollection {
-    private List<User> results;
+    private java.util.List<User> results;
     private String nextCursor;
     private Boolean hasMore;
     @JsonSetter("results")
-    public void setResults(List<User> results) {
+    public void setResults(java.util.List<User> results) {
         this.results = results;
     }
     @JsonGetter("results")
-    public List<User> getResults() {
+    public java.util.List<User> getResults() {
         return this.results;
     }
     @JsonSetter("next_cursor")
