@@ -7,20 +7,18 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.time.LocalDateTime;
-import java.util.Map;
 public class Page {
     private String object;
     private String id;
-    private LocalDateTime createdTime;
-    private LocalDateTime lastEditedTime;
+    private java.time.LocalDateTime createdTime;
+    private java.time.LocalDateTime lastEditedTime;
     private User createdBy;
     private User lastEditedBy;
     private String cover;
     private String icon;
     private Object parent;
     private Boolean inTrash;
-    private Map<String, Object> properties;
+    private java.util.Map<String, Object> properties;
     private String url;
     private String publicUrl;
     @JsonSetter("object")
@@ -40,19 +38,19 @@ public class Page {
         return this.id;
     }
     @JsonSetter("created_time")
-    public void setCreatedTime(LocalDateTime createdTime) {
+    public void setCreatedTime(java.time.LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
     @JsonGetter("created_time")
-    public LocalDateTime getCreatedTime() {
+    public java.time.LocalDateTime getCreatedTime() {
         return this.createdTime;
     }
     @JsonSetter("last_edited_time")
-    public void setLastEditedTime(LocalDateTime lastEditedTime) {
+    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
     }
     @JsonGetter("last_edited_time")
-    public LocalDateTime getLastEditedTime() {
+    public java.time.LocalDateTime getLastEditedTime() {
         return this.lastEditedTime;
     }
     @JsonSetter("created_by")
@@ -104,11 +102,11 @@ public class Page {
         return this.inTrash;
     }
     @JsonSetter("properties")
-    public void setProperties(Map<String, Object> properties) {
+    public void setProperties(java.util.Map<String, Object> properties) {
         this.properties = properties;
     }
     @JsonGetter("properties")
-    public Map<String, Object> getProperties() {
+    public java.util.Map<String, Object> getProperties() {
         return this.properties;
     }
     @JsonSetter("url")

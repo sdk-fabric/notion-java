@@ -7,13 +7,12 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import java.time.LocalDateTime;
 public class Block {
     private String object;
     private String id;
     private Page parent;
-    private LocalDateTime createdTime;
-    private LocalDateTime lastEditedTime;
+    private java.time.LocalDateTime createdTime;
+    private java.time.LocalDateTime lastEditedTime;
     private User createdBy;
     private User lastEditedBy;
     private Boolean hasChildren;
@@ -44,19 +43,19 @@ public class Block {
         return this.parent;
     }
     @JsonSetter("created_time")
-    public void setCreatedTime(LocalDateTime createdTime) {
+    public void setCreatedTime(java.time.LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
     @JsonGetter("created_time")
-    public LocalDateTime getCreatedTime() {
+    public java.time.LocalDateTime getCreatedTime() {
         return this.createdTime;
     }
     @JsonSetter("last_edited_time")
-    public void setLastEditedTime(LocalDateTime lastEditedTime) {
+    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
     }
     @JsonGetter("last_edited_time")
-    public LocalDateTime getLastEditedTime() {
+    public java.time.LocalDateTime getLastEditedTime() {
         return this.lastEditedTime;
     }
     @JsonSetter("created_by")
