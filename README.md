@@ -19,7 +19,7 @@ the code.
 The following example shows how you initialize the client:
 
 ```java
-import SdkFabric.Notion.Client;
+import org.sdkfabric.notion.Client;
 
 Client client = Client::build("[access_token]");
 
