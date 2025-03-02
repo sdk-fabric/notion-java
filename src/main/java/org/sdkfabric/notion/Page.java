@@ -14,11 +14,11 @@ public class Page {
     private java.time.LocalDateTime lastEditedTime;
     private User createdBy;
     private User lastEditedBy;
-    private String cover;
-    private String icon;
-    private Object parent;
+    private FileObject cover;
+    private Icon icon;
     private Boolean inTrash;
     private java.util.Map<String, Object> properties;
+    private ParentId parent;
     private String url;
     private String publicUrl;
 
@@ -83,33 +83,23 @@ public class Page {
     }
 
     @JsonSetter("cover")
-    public void setCover(String cover) {
+    public void setCover(FileObject cover) {
         this.cover = cover;
     }
 
     @JsonGetter("cover")
-    public String getCover() {
+    public FileObject getCover() {
         return this.cover;
     }
 
     @JsonSetter("icon")
-    public void setIcon(String icon) {
+    public void setIcon(Icon icon) {
         this.icon = icon;
     }
 
     @JsonGetter("icon")
-    public String getIcon() {
+    public Icon getIcon() {
         return this.icon;
-    }
-
-    @JsonSetter("parent")
-    public void setParent(Object parent) {
-        this.parent = parent;
-    }
-
-    @JsonGetter("parent")
-    public Object getParent() {
-        return this.parent;
     }
 
     @JsonSetter("in_trash")
@@ -130,6 +120,16 @@ public class Page {
     @JsonGetter("properties")
     public java.util.Map<String, Object> getProperties() {
         return this.properties;
+    }
+
+    @JsonSetter("parent")
+    public void setParent(ParentId parent) {
+        this.parent = parent;
+    }
+
+    @JsonGetter("parent")
+    public ParentId getParent() {
+        return this.parent;
     }
 
     @JsonSetter("url")
