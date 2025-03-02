@@ -8,17 +8,17 @@ package org.sdkfabric.notion;
 import com.fasterxml.jackson.annotation.*;
 
 public class Comment {
-    private PageId parent;
+    private ParentId parent;
     private String discussionId;
     private RichText richText;
 
     @JsonSetter("parent")
-    public void setParent(PageId parent) {
+    public void setParent(ParentId parent) {
         this.parent = parent;
     }
 
     @JsonGetter("parent")
-    public PageId getParent() {
+    public ParentId getParent() {
         return this.parent;
     }
 
