@@ -7,7 +7,12 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class RichText {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = RichTextEquation.class, name = "equation"),
+    @JsonSubTypes.Type(value = RichTextText.class, name = "text"),
+})
+public abstract class RichText {
     private String type;
     private RichTextAnnotation annotations;
     private String plainText;

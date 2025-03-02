@@ -10,6 +10,24 @@ import com.fasterxml.jackson.annotation.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = BlockBookmark.class, name = "bookmark"),
+    @JsonSubTypes.Type(value = BlockBreadcrumb.class, name = "breadcrumb"),
+    @JsonSubTypes.Type(value = BlockBulletedListItem.class, name = "bulleted_list_item"),
+    @JsonSubTypes.Type(value = BlockCallout.class, name = "callout"),
+    @JsonSubTypes.Type(value = BlockChildDatabase.class, name = "child_database"),
+    @JsonSubTypes.Type(value = BlockChildPage.class, name = "child_page"),
+    @JsonSubTypes.Type(value = BlockCode.class, name = "code"),
+    @JsonSubTypes.Type(value = BlockDivider.class, name = "divider"),
+    @JsonSubTypes.Type(value = BlockEmbed.class, name = "embed"),
+    @JsonSubTypes.Type(value = BlockEquation.class, name = "equation"),
+    @JsonSubTypes.Type(value = BlockFile.class, name = "file"),
+    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_1"),
+    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_2"),
+    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_3"),
+    @JsonSubTypes.Type(value = BlockImage.class, name = "image"),
+    @JsonSubTypes.Type(value = BlockNumberedListItem.class, name = "numbered_list_item"),
+    @JsonSubTypes.Type(value = BlockParagraph.class, name = "paragraph"),
+    @JsonSubTypes.Type(value = BlockPDF.class, name = "pdf"),
+    @JsonSubTypes.Type(value = BlockQuote.class, name = "quote"),
 })
 public abstract class Block {
     private String object;
