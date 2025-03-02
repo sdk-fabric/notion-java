@@ -5,8 +5,8 @@
 
 package org.sdkfabric.notion;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+
 public class Database {
     private String object;
     private String id;
@@ -17,76 +17,95 @@ public class Database {
     private String url;
     private java.util.List<DatabaseTitle> title;
     private java.util.List<DatabaseTitle> description;
+
     @JsonSetter("object")
     public void setObject(String object) {
         this.object = object;
     }
+
     @JsonGetter("object")
     public String getObject() {
         return this.object;
     }
+
     @JsonSetter("id")
     public void setId(String id) {
         this.id = id;
     }
+
     @JsonGetter("id")
     public String getId() {
         return this.id;
     }
+
     @JsonSetter("created_time")
     public void setCreatedTime(java.time.LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
+
     @JsonGetter("created_time")
     public java.time.LocalDateTime getCreatedTime() {
         return this.createdTime;
     }
+
     @JsonSetter("last_edited_time")
     public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
     }
+
     @JsonGetter("last_edited_time")
     public java.time.LocalDateTime getLastEditedTime() {
         return this.lastEditedTime;
     }
+
     @JsonSetter("icon")
     public void setIcon(DatabaseIcon icon) {
         this.icon = icon;
     }
+
     @JsonGetter("icon")
     public DatabaseIcon getIcon() {
         return this.icon;
     }
+
     @JsonSetter("cover")
     public void setCover(DatabaseCover cover) {
         this.cover = cover;
     }
+
     @JsonGetter("cover")
     public DatabaseCover getCover() {
         return this.cover;
     }
+
     @JsonSetter("url")
     public void setUrl(String url) {
         this.url = url;
     }
+
     @JsonGetter("url")
     public String getUrl() {
         return this.url;
     }
+
     @JsonSetter("title")
     public void setTitle(java.util.List<DatabaseTitle> title) {
         this.title = title;
     }
+
     @JsonGetter("title")
     public java.util.List<DatabaseTitle> getTitle() {
         return this.title;
     }
+
     @JsonSetter("description")
     public void setDescription(java.util.List<DatabaseTitle> description) {
         this.description = description;
     }
+
     @JsonGetter("description")
     public java.util.List<DatabaseTitle> getDescription() {
         return this.description;
     }
 }
+

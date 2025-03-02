@@ -5,43 +5,52 @@
 
 package org.sdkfabric.notion;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+
 public class RichText {
     private String type;
     private RichTextAnnotation annotations;
     private String plainText;
     private String href;
+
     @JsonSetter("type")
     public void setType(String type) {
         this.type = type;
     }
+
     @JsonGetter("type")
     public String getType() {
         return this.type;
     }
+
     @JsonSetter("annotations")
     public void setAnnotations(RichTextAnnotation annotations) {
         this.annotations = annotations;
     }
+
     @JsonGetter("annotations")
     public RichTextAnnotation getAnnotations() {
         return this.annotations;
     }
+
     @JsonSetter("plain_text")
     public void setPlainText(String plainText) {
         this.plainText = plainText;
     }
+
     @JsonGetter("plain_text")
     public String getPlainText() {
         return this.plainText;
     }
+
     @JsonSetter("href")
     public void setHref(String href) {
         this.href = href;
     }
+
     @JsonGetter("href")
     public String getHref() {
         return this.href;
     }
 }
+

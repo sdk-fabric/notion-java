@@ -5,8 +5,8 @@
 
 package org.sdkfabric.notion;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+
 public class User {
     private String object;
     private String id;
@@ -14,52 +14,65 @@ public class User {
     private Person person;
     private String name;
     private String avatarUrl;
+
     @JsonSetter("object")
     public void setObject(String object) {
         this.object = object;
     }
+
     @JsonGetter("object")
     public String getObject() {
         return this.object;
     }
+
     @JsonSetter("id")
     public void setId(String id) {
         this.id = id;
     }
+
     @JsonGetter("id")
     public String getId() {
         return this.id;
     }
+
     @JsonSetter("type")
     public void setType(String type) {
         this.type = type;
     }
+
     @JsonGetter("type")
     public String getType() {
         return this.type;
     }
+
     @JsonSetter("person")
     public void setPerson(Person person) {
         this.person = person;
     }
+
     @JsonGetter("person")
     public Person getPerson() {
         return this.person;
     }
+
     @JsonSetter("name")
     public void setName(String name) {
         this.name = name;
     }
+
     @JsonGetter("name")
     public String getName() {
         return this.name;
     }
+
     @JsonSetter("avatar_url")
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
     @JsonGetter("avatar_url")
     public String getAvatarUrl() {
         return this.avatarUrl;
     }
 }
+

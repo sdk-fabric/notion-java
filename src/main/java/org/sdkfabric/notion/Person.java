@@ -5,16 +5,19 @@
 
 package org.sdkfabric.notion;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+
 public class Person {
     private String email;
+
     @JsonSetter("email")
     public void setEmail(String email) {
         this.email = email;
     }
+
     @JsonGetter("email")
     public String getEmail() {
         return this.email;
     }
 }
+

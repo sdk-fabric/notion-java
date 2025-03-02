@@ -5,16 +5,19 @@
 
 package org.sdkfabric.notion;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+
 public class PageId {
     private String pageId;
+
     @JsonSetter("page_id")
     public void setPageId(String pageId) {
         this.pageId = pageId;
     }
+
     @JsonGetter("page_id")
     public String getPageId() {
         return this.pageId;
     }
 }
+
