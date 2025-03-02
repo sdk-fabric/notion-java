@@ -8,27 +8,38 @@ package org.sdkfabric.notion;
 import com.fasterxml.jackson.annotation.*;
 
 public class File {
-    private String url;
-    private java.time.LocalDateTime expiryTime;
+    private java.util.List<RichText> caption;
+    private FileObject file;
+    private String name;
 
-    @JsonSetter("url")
-    public void setUrl(String url) {
-        this.url = url;
+    @JsonSetter("caption")
+    public void setCaption(java.util.List<RichText> caption) {
+        this.caption = caption;
     }
 
-    @JsonGetter("url")
-    public String getUrl() {
-        return this.url;
+    @JsonGetter("caption")
+    public java.util.List<RichText> getCaption() {
+        return this.caption;
     }
 
-    @JsonSetter("expiry_time")
-    public void setExpiryTime(java.time.LocalDateTime expiryTime) {
-        this.expiryTime = expiryTime;
+    @JsonSetter("file")
+    public void setFile(FileObject file) {
+        this.file = file;
     }
 
-    @JsonGetter("expiry_time")
-    public java.time.LocalDateTime getExpiryTime() {
-        return this.expiryTime;
+    @JsonGetter("file")
+    public FileObject getFile() {
+        return this.file;
+    }
+
+    @JsonSetter("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonGetter("name")
+    public String getName() {
+        return this.name;
     }
 }
 
