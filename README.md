@@ -15,7 +15,7 @@ import org.sdkfabric.notion.Client;
 Client client = Client::build("[access_token]");
 
 // Returns a paginated list of Users for the workspace.
-UserCollection response = client.user().getall("Notion-Version", "start_cursor", 1);
+User_Collection response = client.user().getAll("Notion-Version", "start_cursor", 1);
 
 // Retrieves a User using the ID specified.
 User response = client.user().get("Notion-Version", "user_id");
