@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Icon hosted at an external URL.")
 public class ExternalIcon extends Icon {
+    @JsonProperty("external")
     private ExternalObject external;
 
-    @JsonSetter("external")
+
     public void setExternal(ExternalObject external) {
         this.external = external;
     }
 
-    @JsonGetter("external")
     public ExternalObject getExternal() {
         return this.external;
     }

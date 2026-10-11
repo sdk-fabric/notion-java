@@ -34,19 +34,60 @@ public class UserTag extends TagAbstract {
 
 
     /**
+     * Retrieves a User using the ID specified.
+     */
+    public User get(String userId) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("user_id", userId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/users/:user_id", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpGet request = new HttpGet(builder.build());
+
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<User>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * Returns a paginated list of Users for the workspace. The response may contain fewer than page_size of results.
      */
-    public UserCollection getAll(String startCursor, Integer pageSize) throws ClientException {
+    public UserCollection getAll(Integer pageSize, String startCursor) throws ClientException {
         try {
             Map<String, Object> pathParams = new HashMap<>();
 
             Map<String, Object> queryParams = new HashMap<>();
-            queryParams.put("start_cursor", startCursor);
             queryParams.put("page_size", pageSize);
+            queryParams.put("start_cursor", startCursor);
 
             List<String> queryStructNames = new ArrayList<>();
 
-            URIBuilder builder = new URIBuilder(this.parser.url("/v1/users", pathParams));
+            URIBuilder builder = new URIBuilder(this.parser.url("/users", pathParams));
             this.parser.query(builder, queryParams, queryStructNames);
 
             HttpGet request = new HttpGet(builder.build());
@@ -76,18 +117,17 @@ public class UserTag extends TagAbstract {
     }
 
     /**
-     * Retrieves a User using the ID specified.
+     * Retrieves the bot User associated with the API token provided in the authorization header.
      */
-    public User get(String userId) throws ClientException {
+    public User getMe() throws ClientException {
         try {
             Map<String, Object> pathParams = new HashMap<>();
-            pathParams.put("user_id", userId);
 
             Map<String, Object> queryParams = new HashMap<>();
 
             List<String> queryStructNames = new ArrayList<>();
 
-            URIBuilder builder = new URIBuilder(this.parser.url("/v1/users/:user_id", pathParams));
+            URIBuilder builder = new URIBuilder(this.parser.url("/users/me", pathParams));
             this.parser.query(builder, queryParams, queryStructNames);
 
             HttpGet request = new HttpGet(builder.build());

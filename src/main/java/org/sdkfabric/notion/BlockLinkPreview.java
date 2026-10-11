@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class BlockLinkPreview {
+@JsonClassDescription("Link preview block (read-only).")
+public class BlockLinkPreview extends Block {
+    @JsonProperty("link_preview")
     private LinkPreview linkPreview;
 
-    @JsonSetter("link_preview")
+
     public void setLinkPreview(LinkPreview linkPreview) {
         this.linkPreview = linkPreview;
     }
 
-    @JsonGetter("link_preview")
     public LinkPreview getLinkPreview() {
         return this.linkPreview;
     }

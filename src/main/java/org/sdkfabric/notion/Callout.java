@@ -7,39 +7,40 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a callout block.")
 public class Callout {
-    private java.util.List<RichText> richText;
-    private Icon icon;
+    @JsonProperty("color")
     private String color;
 
-    @JsonSetter("rich_text")
-    public void setRichText(java.util.List<RichText> richText) {
-        this.richText = richText;
-    }
+    @JsonProperty("icon")
+    private Icon icon;
 
-    @JsonGetter("rich_text")
-    public java.util.List<RichText> getRichText() {
-        return this.richText;
-    }
+    @JsonProperty("rich_text")
+    private java.util.List<RichText> richText;
 
-    @JsonSetter("icon")
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-    }
 
-    @JsonGetter("icon")
-    public Icon getIcon() {
-        return this.icon;
-    }
-
-    @JsonSetter("color")
     public void setColor(String color) {
         this.color = color;
     }
 
-    @JsonGetter("color")
     public String getColor() {
         return this.color;
+    }
+
+    public void setIcon(Icon icon) {
+        this.icon = icon;
+    }
+
+    public Icon getIcon() {
+        return this.icon;
+    }
+
+    public void setRichText(java.util.List<RichText> richText) {
+        this.richText = richText;
+    }
+
+    public java.util.List<RichText> getRichText() {
+        return this.richText;
     }
 }
 

@@ -7,72 +7,91 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("A user in a Notion workspace: a member, guest or bot (integration).")
 public class User {
-    private String object;
-    private String id;
-    private String type;
-    private Person person;
-    private String name;
+    @JsonPropertyDescription("The avatar URL of the user.")
+    @JsonProperty("avatar_url")
     private String avatarUrl;
 
-    @JsonSetter("object")
-    public void setObject(String object) {
-        this.object = object;
-    }
+    @JsonPropertyDescription("Details about the bot, when type is bot.")
+    @JsonProperty("bot")
+    private UserBot bot;
 
-    @JsonGetter("object")
-    public String getObject() {
-        return this.object;
-    }
+    @JsonPropertyDescription("The ID of the user.")
+    @JsonProperty("id")
+    private String id;
 
-    @JsonSetter("id")
-    public void setId(String id) {
-        this.id = id;
-    }
+    @JsonPropertyDescription("The name of the user.")
+    @JsonProperty("name")
+    private String name;
 
-    @JsonGetter("id")
-    public String getId() {
-        return this.id;
-    }
+    @JsonPropertyDescription("Always \"user\".")
+    @JsonProperty("object")
+    private String object;
 
-    @JsonSetter("type")
-    public void setType(String type) {
-        this.type = type;
-    }
+    @JsonPropertyDescription("Details about the person, when type is person.")
+    @JsonProperty("person")
+    private Person person;
 
-    @JsonGetter("type")
-    public String getType() {
-        return this.type;
-    }
+    @JsonPropertyDescription("person or bot.")
+    @JsonProperty("type")
+    private String type;
 
-    @JsonSetter("person")
-    public void setPerson(Person person) {
-        this.person = person;
-    }
 
-    @JsonGetter("person")
-    public Person getPerson() {
-        return this.person;
-    }
-
-    @JsonSetter("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonGetter("name")
-    public String getName() {
-        return this.name;
-    }
-
-    @JsonSetter("avatar_url")
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
 
-    @JsonGetter("avatar_url")
     public String getAvatarUrl() {
         return this.avatarUrl;
+    }
+
+    public void setBot(UserBot bot) {
+        this.bot = bot;
+    }
+
+    public UserBot getBot() {
+        return this.bot;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public Person getPerson() {
+        return this.person;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

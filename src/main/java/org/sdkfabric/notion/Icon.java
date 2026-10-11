@@ -9,19 +9,24 @@ import com.fasterxml.jackson.annotation.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = CustomEmojiIcon.class, name = "custom_emoji"),
     @JsonSubTypes.Type(value = EmojiIcon.class, name = "emoji"),
-    @JsonSubTypes.Type(value = FileIcon.class, name = "file"),
     @JsonSubTypes.Type(value = ExternalIcon.class, name = "external"),
+    @JsonSubTypes.Type(value = FileIcon.class, name = "file"),
+    @JsonSubTypes.Type(value = FileUploadIcon.class, name = "file_upload"),
+    @JsonSubTypes.Type(value = NoticonIcon.class, name = "icon"),
 })
+@JsonClassDescription("Page, database or block icon.")
 public abstract class Icon {
+    @JsonPropertyDescription("Type of icon: emoji, file, external, custom_emoji, icon or file_upload.")
+    @JsonProperty("type")
     private String type;
 
-    @JsonSetter("type")
+
     public void setType(String type) {
         this.type = type;
     }
 
-    @JsonGetter("type")
     public String getType() {
         return this.type;
     }

@@ -7,16 +7,18 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Image block.")
 public class BlockImage extends Block {
-    private FileObject image;
+    @JsonPropertyDescription("Image block content.")
+    @JsonProperty("image")
+    private File image;
 
-    @JsonSetter("image")
-    public void setImage(FileObject image) {
+
+    public void setImage(File image) {
         this.image = image;
     }
 
-    @JsonGetter("image")
-    public FileObject getImage() {
+    public File getImage() {
         return this.image;
     }
 }

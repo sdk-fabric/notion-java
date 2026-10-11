@@ -9,20 +9,24 @@ import com.fasterxml.jackson.annotation.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = AgentParentId.class, name = "agent_id"),
+    @JsonSubTypes.Type(value = BlockParentId.class, name = "block_id"),
+    @JsonSubTypes.Type(value = DataSourceParentId.class, name = "data_source_id"),
     @JsonSubTypes.Type(value = DatabaseParentId.class, name = "database_id"),
     @JsonSubTypes.Type(value = PageParentId.class, name = "page_id"),
-    @JsonSubTypes.Type(value = BlockParentId.class, name = "block_id"),
     @JsonSubTypes.Type(value = WorkspaceParentId.class, name = "workspace"),
 })
+@JsonClassDescription("Information about the parent of a page, block, database, data source or comment.")
 public abstract class ParentId {
+    @JsonPropertyDescription("The parent type.")
+    @JsonProperty("type")
     private String type;
 
-    @JsonSetter("type")
+
     public void setType(String type) {
         this.type = type;
     }
 
-    @JsonGetter("type")
     public String getType() {
         return this.type;
     }

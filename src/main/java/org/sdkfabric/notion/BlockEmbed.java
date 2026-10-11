@@ -7,6 +7,19 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Embed block.")
 public class BlockEmbed extends Block {
+    @JsonPropertyDescription("Embed block content.")
+    @JsonProperty("embed")
+    private Embed embed;
+
+
+    public void setEmbed(Embed embed) {
+        this.embed = embed;
+    }
+
+    public Embed getEmbed() {
+        return this.embed;
+    }
 }
 

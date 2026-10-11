@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a link preview.")
 public class LinkPreview {
+    @JsonProperty("url")
     private String url;
 
-    @JsonSetter("url")
+
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonGetter("url")
     public String getUrl() {
         return this.url;
     }

@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Child database block.")
 public class BlockChildDatabase extends Block {
+    @JsonProperty("child_database")
     private ChildDatabase childDatabase;
 
-    @JsonSetter("child_database")
+
     public void setChildDatabase(ChildDatabase childDatabase) {
         this.childDatabase = childDatabase;
     }
 
-    @JsonGetter("child_database")
     public ChildDatabase getChildDatabase() {
         return this.childDatabase;
     }

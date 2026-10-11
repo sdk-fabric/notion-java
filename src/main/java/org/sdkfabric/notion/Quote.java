@@ -7,39 +7,40 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a quote block.")
 public class Quote {
-    private java.util.List<RichText> richText;
-    private String color;
+    @JsonProperty("children")
     private java.util.List<Block> children;
 
-    @JsonSetter("rich_text")
-    public void setRichText(java.util.List<RichText> richText) {
-        this.richText = richText;
-    }
+    @JsonProperty("color")
+    private String color;
 
-    @JsonGetter("rich_text")
-    public java.util.List<RichText> getRichText() {
-        return this.richText;
-    }
+    @JsonProperty("rich_text")
+    private java.util.List<RichText> richText;
 
-    @JsonSetter("color")
-    public void setColor(String color) {
-        this.color = color;
-    }
 
-    @JsonGetter("color")
-    public String getColor() {
-        return this.color;
-    }
-
-    @JsonSetter("children")
     public void setChildren(java.util.List<Block> children) {
         this.children = children;
     }
 
-    @JsonGetter("children")
     public java.util.List<Block> getChildren() {
         return this.children;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setRichText(java.util.List<RichText> richText) {
+        this.richText = richText;
+    }
+
+    public java.util.List<RichText> getRichText() {
+        return this.richText;
     }
 }
 

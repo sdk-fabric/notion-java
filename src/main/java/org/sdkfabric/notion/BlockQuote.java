@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Quote block.")
 public class BlockQuote extends Block {
+    @JsonProperty("quote")
     private Quote quote;
 
-    @JsonSetter("quote")
+
     public void setQuote(Quote quote) {
         this.quote = quote;
     }
 
-    @JsonGetter("quote")
     public Quote getQuote() {
         return this.quote;
     }

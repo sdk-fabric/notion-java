@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("A LaTeX equation expression.")
 public class Equation {
+    @JsonProperty("expression")
     private String expression;
 
-    @JsonSetter("expression")
+
     public void setExpression(String expression) {
         this.expression = expression;
     }
 
-    @JsonGetter("expression")
     public String getExpression() {
         return this.expression;
     }

@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Child page block.")
 public class BlockChildPage extends Block {
+    @JsonProperty("child_page")
     private ChildPage childPage;
 
-    @JsonSetter("child_page")
+
     public void setChildPage(ChildPage childPage) {
         this.childPage = childPage;
     }
 
-    @JsonGetter("child_page")
     public ChildPage getChildPage() {
         return this.childPage;
     }

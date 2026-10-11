@@ -7,72 +7,73 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Styling annotations of rich text.")
 public class RichTextAnnotation {
+    @JsonProperty("bold")
     private Boolean bold;
-    private Boolean italic;
-    private Boolean strikethrough;
-    private Boolean underline;
+
+    @JsonProperty("code")
     private Boolean code;
+
+    @JsonProperty("color")
     private String color;
 
-    @JsonSetter("bold")
+    @JsonProperty("italic")
+    private Boolean italic;
+
+    @JsonProperty("strikethrough")
+    private Boolean strikethrough;
+
+    @JsonProperty("underline")
+    private Boolean underline;
+
+
     public void setBold(Boolean bold) {
         this.bold = bold;
     }
 
-    @JsonGetter("bold")
     public Boolean getBold() {
         return this.bold;
     }
 
-    @JsonSetter("italic")
-    public void setItalic(Boolean italic) {
-        this.italic = italic;
-    }
-
-    @JsonGetter("italic")
-    public Boolean getItalic() {
-        return this.italic;
-    }
-
-    @JsonSetter("strikethrough")
-    public void setStrikethrough(Boolean strikethrough) {
-        this.strikethrough = strikethrough;
-    }
-
-    @JsonGetter("strikethrough")
-    public Boolean getStrikethrough() {
-        return this.strikethrough;
-    }
-
-    @JsonSetter("underline")
-    public void setUnderline(Boolean underline) {
-        this.underline = underline;
-    }
-
-    @JsonGetter("underline")
-    public Boolean getUnderline() {
-        return this.underline;
-    }
-
-    @JsonSetter("code")
     public void setCode(Boolean code) {
         this.code = code;
     }
 
-    @JsonGetter("code")
     public Boolean getCode() {
         return this.code;
     }
 
-    @JsonSetter("color")
     public void setColor(String color) {
         this.color = color;
     }
 
-    @JsonGetter("color")
     public String getColor() {
         return this.color;
+    }
+
+    public void setItalic(Boolean italic) {
+        this.italic = italic;
+    }
+
+    public Boolean getItalic() {
+        return this.italic;
+    }
+
+    public void setStrikethrough(Boolean strikethrough) {
+        this.strikethrough = strikethrough;
+    }
+
+    public Boolean getStrikethrough() {
+        return this.strikethrough;
+    }
+
+    public void setUnderline(Boolean underline) {
+        this.underline = underline;
+    }
+
+    public Boolean getUnderline() {
+        return this.underline;
     }
 }
 

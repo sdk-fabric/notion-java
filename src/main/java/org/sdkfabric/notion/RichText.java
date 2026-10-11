@@ -10,52 +10,58 @@ import com.fasterxml.jackson.annotation.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = RichTextEquation.class, name = "equation"),
+    @JsonSubTypes.Type(value = RichTextMention.class, name = "mention"),
     @JsonSubTypes.Type(value = RichTextText.class, name = "text"),
 })
+@JsonClassDescription("Rich text object containing styled text, mentions or inline equations.")
 public abstract class RichText {
-    private String type;
+    @JsonPropertyDescription("Styling of the rich text.")
+    @JsonProperty("annotations")
     private RichTextAnnotation annotations;
-    private String plainText;
+
+    @JsonPropertyDescription("A URL that the rich text links to or mentions.")
+    @JsonProperty("href")
     private String href;
 
-    @JsonSetter("type")
-    public void setType(String type) {
-        this.type = type;
-    }
+    @JsonPropertyDescription("The plain text content, without any styling.")
+    @JsonProperty("plain_text")
+    private String plainText;
 
-    @JsonGetter("type")
-    public String getType() {
-        return this.type;
-    }
+    @JsonPropertyDescription("text, mention or equation.")
+    @JsonProperty("type")
+    private String type;
 
-    @JsonSetter("annotations")
+
     public void setAnnotations(RichTextAnnotation annotations) {
         this.annotations = annotations;
     }
 
-    @JsonGetter("annotations")
     public RichTextAnnotation getAnnotations() {
         return this.annotations;
     }
 
-    @JsonSetter("plain_text")
-    public void setPlainText(String plainText) {
-        this.plainText = plainText;
-    }
-
-    @JsonGetter("plain_text")
-    public String getPlainText() {
-        return this.plainText;
-    }
-
-    @JsonSetter("href")
     public void setHref(String href) {
         this.href = href;
     }
 
-    @JsonGetter("href")
     public String getHref() {
         return this.href;
+    }
+
+    public void setPlainText(String plainText) {
+        this.plainText = plainText;
+    }
+
+    public String getPlainText() {
+        return this.plainText;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

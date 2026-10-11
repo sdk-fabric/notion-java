@@ -7,6 +7,19 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Breadcrumb block.")
 public class BlockBreadcrumb extends Block {
+    @JsonPropertyDescription("Always an empty object.")
+    @JsonProperty("breadcrumb")
+    private EmptyObject breadcrumb;
+
+
+    public void setBreadcrumb(EmptyObject breadcrumb) {
+        this.breadcrumb = breadcrumb;
+    }
+
+    public EmptyObject getBreadcrumb() {
+        return this.breadcrumb;
+    }
 }
 

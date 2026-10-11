@@ -7,28 +7,79 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Error response returned by the Notion API for any non-2xx status.")
 public class Error {
+    @JsonPropertyDescription("Extra context, such as retry guidance or endpoint-specific details.")
+    @JsonProperty("additional_data")
+    private java.util.Map<String, Object> additionalData;
+
+    @JsonPropertyDescription("Error code, e.g. invalid_json, invalid_request_url, invalid_request, validation_error, missing_version, unauthorized, restricted_resource, object_not_found, conflict_error, rate_limited, internal_server_error, service_unavailable, gateway_timeout.")
+    @JsonProperty("code")
     private String code;
+
+    @JsonPropertyDescription("Human-readable description of the error.")
+    @JsonProperty("message")
     private String message;
 
-    @JsonSetter("code")
+    @JsonPropertyDescription("Always \"error\".")
+    @JsonProperty("object")
+    private String object;
+
+    @JsonPropertyDescription("Unique ID of the request, useful when contacting Notion support.")
+    @JsonProperty("request_id")
+    private String requestId;
+
+    @JsonPropertyDescription("HTTP status code of the error.")
+    @JsonProperty("status")
+    private Integer status;
+
+
+    public void setAdditionalData(java.util.Map<String, Object> additionalData) {
+        this.additionalData = additionalData;
+    }
+
+    public java.util.Map<String, Object> getAdditionalData() {
+        return this.additionalData;
+    }
+
     public void setCode(String code) {
         this.code = code;
     }
 
-    @JsonGetter("code")
     public String getCode() {
         return this.code;
     }
 
-    @JsonSetter("message")
     public void setMessage(String message) {
         this.message = message;
     }
 
-    @JsonGetter("message")
     public String getMessage() {
         return this.message;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getRequestId() {
+        return this.requestId;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getStatus() {
+        return this.status;
     }
 }
 

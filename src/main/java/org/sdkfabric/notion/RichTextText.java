@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Rich text object of type text.")
 public class RichTextText extends RichText {
+    @JsonProperty("text")
     private Text text;
 
-    @JsonSetter("text")
+
     public void setText(Text text) {
         this.text = text;
     }
 
-    @JsonGetter("text")
     public Text getText() {
         return this.text;
     }

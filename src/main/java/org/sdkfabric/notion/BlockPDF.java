@@ -7,16 +7,18 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("PDF block.")
 public class BlockPDF extends Block {
-    private PDF pdf;
+    @JsonPropertyDescription("PDF block content.")
+    @JsonProperty("pdf")
+    private File pdf;
 
-    @JsonSetter("pdf")
-    public void setPdf(PDF pdf) {
+
+    public void setPdf(File pdf) {
         this.pdf = pdf;
     }
 
-    @JsonGetter("pdf")
-    public PDF getPdf() {
+    public File getPdf() {
         return this.pdf;
     }
 }

@@ -7,17 +7,31 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Details about a person user.")
 public class Person {
+    @JsonPropertyDescription("The email of the person.")
+    @JsonProperty("email")
     private String email;
 
-    @JsonSetter("email")
+    @JsonPropertyDescription("Whether the person's email is verified.")
+    @JsonProperty("email_verified")
+    private Boolean emailVerified;
+
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @JsonGetter("email")
     public String getEmail() {
         return this.email;
+    }
+
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public Boolean getEmailVerified() {
+        return this.emailVerified;
     }
 }
 

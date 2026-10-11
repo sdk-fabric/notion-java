@@ -7,26 +7,27 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a bookmark block.")
 public class Bookmark {
+    @JsonProperty("caption")
     private java.util.List<RichText> caption;
+
+    @JsonProperty("url")
     private String url;
 
-    @JsonSetter("caption")
+
     public void setCaption(java.util.List<RichText> caption) {
         this.caption = caption;
     }
 
-    @JsonGetter("caption")
     public java.util.List<RichText> getCaption() {
         return this.caption;
     }
 
-    @JsonSetter("url")
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonGetter("url")
     public String getUrl() {
         return this.url;
     }

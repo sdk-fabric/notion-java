@@ -7,26 +7,29 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Text content of a rich text object of type text.")
 public class Text {
+    @JsonPropertyDescription("The actual text content (max 2000 characters).")
+    @JsonProperty("content")
     private String content;
+
+    @JsonPropertyDescription("Inline link information, if included.")
+    @JsonProperty("link")
     private Link link;
 
-    @JsonSetter("content")
+
     public void setContent(String content) {
         this.content = content;
     }
 
-    @JsonGetter("content")
     public String getContent() {
         return this.content;
     }
 
-    @JsonSetter("link")
     public void setLink(Link link) {
         this.link = link;
     }
 
-    @JsonGetter("link")
     public Link getLink() {
         return this.link;
     }

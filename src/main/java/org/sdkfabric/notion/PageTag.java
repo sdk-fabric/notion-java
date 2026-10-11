@@ -34,18 +34,62 @@ public class PageTag extends TagAbstract {
 
 
     /**
-     * Retrieves a Page object using the ID specified.
+     * Creates a new page as a child of an existing page or data source.
      */
-    public Page get(String pageId) throws ClientException {
+    public Page create(CreatePageRequest payload, String filterProperties) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+
+            Map<String, Object> queryParams = new HashMap<>();
+            queryParams.put("filter_properties", filterProperties);
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpPost request = new HttpPost(builder.build());
+            request.setEntity(new StringEntity(this.objectMapper.writeValueAsString(payload), ContentType.APPLICATION_JSON));
+
+            request.setHeader("Content-Type", "application/json");
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Page>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Retrieves a Page object using the ID specified. To read page content, use Retrieve block children.
+     */
+    public Page get(String pageId, String filterProperties) throws ClientException {
         try {
             Map<String, Object> pathParams = new HashMap<>();
             pathParams.put("page_id", pageId);
 
             Map<String, Object> queryParams = new HashMap<>();
+            queryParams.put("filter_properties", filterProperties);
 
             List<String> queryStructNames = new ArrayList<>();
 
-            URIBuilder builder = new URIBuilder(this.parser.url("/v1/pages/:page_id", pathParams));
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id", pathParams));
             this.parser.query(builder, queryParams, queryStructNames);
 
             HttpGet request = new HttpGet(builder.build());
@@ -75,17 +119,104 @@ public class PageTag extends TagAbstract {
     }
 
     /**
-     * Creates a new page that is a child of an existing page or database.
+     * Retrieves the content of a page rendered as enhanced markdown.
      */
-    public Page create(Page payload) throws ClientException {
+    public PageMarkdown getMarkdown(String pageId, Boolean includeTranscript) throws ClientException {
         try {
             Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("page_id", pageId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+            queryParams.put("include_transcript", includeTranscript);
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id/markdown", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpGet request = new HttpGet(builder.build());
+
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<PageMarkdown>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Retrieves a page property item. Paginated for title, rich_text, relation, people and rollup properties.
+     */
+    public PropertyItem getProperty(String pageId, String propertyId, Integer pageSize, String startCursor) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("page_id", pageId);
+            pathParams.put("property_id", propertyId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+            queryParams.put("page_size", pageSize);
+            queryParams.put("start_cursor", startCursor);
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id/properties/:property_id", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpGet request = new HttpGet(builder.build());
+
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<PropertyItem>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Moves an existing page to a new parent page or data source.
+     */
+    public Page move(String pageId, MovePageRequest payload) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("page_id", pageId);
 
             Map<String, Object> queryParams = new HashMap<>();
 
             List<String> queryStructNames = new ArrayList<>();
 
-            URIBuilder builder = new URIBuilder(this.parser.url("/v1/pages", pathParams));
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id/move", pathParams));
             this.parser.query(builder, queryParams, queryStructNames);
 
             HttpPost request = new HttpPost(builder.build());
@@ -96,6 +227,93 @@ public class PageTag extends TagAbstract {
             return this.httpClient.execute(request, response -> {
                 if (response.getCode() >= 200 && response.getCode() <= 299) {
                     var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Page>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Updates page properties, icon, cover, lock state or trash status (in_trash).
+     */
+    public Page update(String pageId, UpdatePageRequest payload, String filterProperties) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("page_id", pageId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+            queryParams.put("filter_properties", filterProperties);
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpPatch request = new HttpPatch(builder.build());
+            request.setEntity(new StringEntity(this.objectMapper.writeValueAsString(payload), ContentType.APPLICATION_JSON));
+
+            request.setHeader("Content-Type", "application/json");
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Page>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Updates or replaces content in a page using enhanced markdown.
+     */
+    public PageMarkdown updateMarkdown(String pageId, UpdatePageMarkdownRequest payload) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("page_id", pageId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/pages/:page_id/markdown", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpPatch request = new HttpPatch(builder.build());
+            request.setEntity(new StringEntity(this.objectMapper.writeValueAsString(payload), ContentType.APPLICATION_JSON));
+
+            request.setHeader("Content-Type", "application/json");
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<PageMarkdown>(){});
 
                     return data;
                 }

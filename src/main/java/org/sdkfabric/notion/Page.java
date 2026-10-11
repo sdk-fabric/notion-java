@@ -7,149 +7,163 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
-public class Page {
-    private String object;
-    private String id;
-    private java.time.LocalDateTime createdTime;
-    private java.time.LocalDateTime lastEditedTime;
+@JsonClassDescription("The Page object contains the page property values of a single Notion page.")
+public class Page extends PageOrDataSource {
+    @JsonPropertyDescription("Page cover image.")
+    @JsonProperty("cover")
+    private Cover cover;
+
+    @JsonPropertyDescription("User who created the page.")
+    @JsonProperty("created_by")
     private User createdBy;
-    private User lastEditedBy;
-    private FileObject cover;
+
+    @JsonPropertyDescription("Date and time when this page was created.")
+    @JsonProperty("created_time")
+    private java.time.LocalDateTime createdTime;
+
+    @JsonPropertyDescription("Page icon.")
+    @JsonProperty("icon")
     private Icon icon;
+
+    @JsonPropertyDescription("Whether the page is in trash.")
+    @JsonProperty("in_trash")
     private Boolean inTrash;
-    private java.util.Map<String, Object> properties;
+
+    @JsonPropertyDescription("Whether the page has been archived.")
+    @JsonProperty("is_archived")
+    private Boolean isArchived;
+
+    @JsonPropertyDescription("Whether the page is locked from editing in the Notion app UI.")
+    @JsonProperty("is_locked")
+    private Boolean isLocked;
+
+    @JsonPropertyDescription("User who last edited the page.")
+    @JsonProperty("last_edited_by")
+    private User lastEditedBy;
+
+    @JsonPropertyDescription("Date and time when this page was last edited.")
+    @JsonProperty("last_edited_time")
+    private java.time.LocalDateTime lastEditedTime;
+
+    @JsonPropertyDescription("Information about the page's parent.")
+    @JsonProperty("parent")
     private ParentId parent;
-    private String url;
+
+    @JsonPropertyDescription("Property values of this page.")
+    @JsonProperty("properties")
+    private java.util.Map<String, PagePropertyValue> properties;
+
+    @JsonPropertyDescription("The public URL of the page, if it has been published to the web.")
+    @JsonProperty("public_url")
     private String publicUrl;
 
-    @JsonSetter("object")
-    public void setObject(String object) {
-        this.object = object;
+    @JsonPropertyDescription("The URL of the Notion page.")
+    @JsonProperty("url")
+    private String url;
+
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
 
-    @JsonGetter("object")
-    public String getObject() {
-        return this.object;
+    public Cover getCover() {
+        return this.cover;
     }
 
-    @JsonSetter("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @JsonGetter("id")
-    public String getId() {
-        return this.id;
-    }
-
-    @JsonSetter("created_time")
-    public void setCreatedTime(java.time.LocalDateTime createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    @JsonGetter("created_time")
-    public java.time.LocalDateTime getCreatedTime() {
-        return this.createdTime;
-    }
-
-    @JsonSetter("last_edited_time")
-    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
-        this.lastEditedTime = lastEditedTime;
-    }
-
-    @JsonGetter("last_edited_time")
-    public java.time.LocalDateTime getLastEditedTime() {
-        return this.lastEditedTime;
-    }
-
-    @JsonSetter("created_by")
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 
-    @JsonGetter("created_by")
     public User getCreatedBy() {
         return this.createdBy;
     }
 
-    @JsonSetter("last_edited_by")
-    public void setLastEditedBy(User lastEditedBy) {
-        this.lastEditedBy = lastEditedBy;
+    public void setCreatedTime(java.time.LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 
-    @JsonGetter("last_edited_by")
-    public User getLastEditedBy() {
-        return this.lastEditedBy;
+    public java.time.LocalDateTime getCreatedTime() {
+        return this.createdTime;
     }
 
-    @JsonSetter("cover")
-    public void setCover(FileObject cover) {
-        this.cover = cover;
-    }
-
-    @JsonGetter("cover")
-    public FileObject getCover() {
-        return this.cover;
-    }
-
-    @JsonSetter("icon")
     public void setIcon(Icon icon) {
         this.icon = icon;
     }
 
-    @JsonGetter("icon")
     public Icon getIcon() {
         return this.icon;
     }
 
-    @JsonSetter("in_trash")
     public void setInTrash(Boolean inTrash) {
         this.inTrash = inTrash;
     }
 
-    @JsonGetter("in_trash")
     public Boolean getInTrash() {
         return this.inTrash;
     }
 
-    @JsonSetter("properties")
-    public void setProperties(java.util.Map<String, Object> properties) {
-        this.properties = properties;
+    public void setIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
-    @JsonGetter("properties")
-    public java.util.Map<String, Object> getProperties() {
-        return this.properties;
+    public Boolean getIsArchived() {
+        return this.isArchived;
     }
 
-    @JsonSetter("parent")
+    public void setIsLocked(Boolean isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    public Boolean getIsLocked() {
+        return this.isLocked;
+    }
+
+    public void setLastEditedBy(User lastEditedBy) {
+        this.lastEditedBy = lastEditedBy;
+    }
+
+    public User getLastEditedBy() {
+        return this.lastEditedBy;
+    }
+
+    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+    }
+
+    public java.time.LocalDateTime getLastEditedTime() {
+        return this.lastEditedTime;
+    }
+
     public void setParent(ParentId parent) {
         this.parent = parent;
     }
 
-    @JsonGetter("parent")
     public ParentId getParent() {
         return this.parent;
     }
 
-    @JsonSetter("url")
-    public void setUrl(String url) {
-        this.url = url;
+    public void setProperties(java.util.Map<String, PagePropertyValue> properties) {
+        this.properties = properties;
     }
 
-    @JsonGetter("url")
-    public String getUrl() {
-        return this.url;
+    public java.util.Map<String, PagePropertyValue> getProperties() {
+        return this.properties;
     }
 
-    @JsonSetter("public_url")
     public void setPublicUrl(String publicUrl) {
         this.publicUrl = publicUrl;
     }
 
-    @JsonGetter("public_url")
     public String getPublicUrl() {
         return this.publicUrl;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return this.url;
     }
 }
 

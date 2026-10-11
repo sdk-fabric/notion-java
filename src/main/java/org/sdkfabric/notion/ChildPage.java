@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a child page block.")
 public class ChildPage {
+    @JsonProperty("title")
     private String title;
 
-    @JsonSetter("title")
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    @JsonGetter("title")
     public String getTitle() {
         return this.title;
     }

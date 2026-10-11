@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Icon hosted by Notion.")
 public class FileIcon extends Icon {
+    @JsonProperty("file")
     private FileObject file;
 
-    @JsonSetter("file")
+
     public void setFile(FileObject file) {
         this.file = file;
     }
 
-    @JsonGetter("file")
     public FileObject getFile() {
         return this.file;
     }

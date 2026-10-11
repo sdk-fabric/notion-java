@@ -7,38 +7,150 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("A comment on a Notion page or block.")
 public class Comment {
-    private ParentId parent;
+    @JsonPropertyDescription("File attachments of the comment.")
+    @JsonProperty("attachments")
+    private java.util.List<CommentAttachment> attachments;
+
+    @JsonPropertyDescription("The user who created the comment.")
+    @JsonProperty("created_by")
+    private User createdBy;
+
+    @JsonPropertyDescription("When the comment was created.")
+    @JsonProperty("created_time")
+    private java.time.LocalDateTime createdTime;
+
+    @JsonPropertyDescription("The ID of the discussion thread this comment belongs to.")
+    @JsonProperty("discussion_id")
     private String discussionId;
-    private RichText richText;
 
-    @JsonSetter("parent")
-    public void setParent(ParentId parent) {
-        this.parent = parent;
+    @JsonPropertyDescription("The display name of the comment.")
+    @JsonProperty("display_name")
+    private CommentDisplayName displayName;
+
+    @JsonPropertyDescription("Whether any file attachments are still uploading.")
+    @JsonProperty("has_pending_attachments")
+    private Boolean hasPendingAttachments;
+
+    @JsonPropertyDescription("The ID of the comment.")
+    @JsonProperty("id")
+    private String id;
+
+    @JsonPropertyDescription("When the comment was last edited.")
+    @JsonProperty("last_edited_time")
+    private java.time.LocalDateTime lastEditedTime;
+
+    @JsonPropertyDescription("Always `comment`.")
+    @JsonProperty("object")
+    private String object;
+
+    @JsonPropertyDescription("Whether this comment's original content was deleted.")
+    @JsonProperty("original_content_deleted")
+    private Boolean originalContentDeleted;
+
+    @JsonPropertyDescription("The parent page or block of the comment.")
+    @JsonProperty("parent")
+    private ParentId parent;
+
+    @JsonPropertyDescription("The rich text content of the comment.")
+    @JsonProperty("rich_text")
+    private java.util.List<RichText> richText;
+
+
+    public void setAttachments(java.util.List<CommentAttachment> attachments) {
+        this.attachments = attachments;
     }
 
-    @JsonGetter("parent")
-    public ParentId getParent() {
-        return this.parent;
+    public java.util.List<CommentAttachment> getAttachments() {
+        return this.attachments;
     }
 
-    @JsonSetter("discussion_id")
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setCreatedTime(java.time.LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public java.time.LocalDateTime getCreatedTime() {
+        return this.createdTime;
+    }
+
     public void setDiscussionId(String discussionId) {
         this.discussionId = discussionId;
     }
 
-    @JsonGetter("discussion_id")
     public String getDiscussionId() {
         return this.discussionId;
     }
 
-    @JsonSetter("rich_text")
-    public void setRichText(RichText richText) {
+    public void setDisplayName(CommentDisplayName displayName) {
+        this.displayName = displayName;
+    }
+
+    public CommentDisplayName getDisplayName() {
+        return this.displayName;
+    }
+
+    public void setHasPendingAttachments(Boolean hasPendingAttachments) {
+        this.hasPendingAttachments = hasPendingAttachments;
+    }
+
+    public Boolean getHasPendingAttachments() {
+        return this.hasPendingAttachments;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+    }
+
+    public java.time.LocalDateTime getLastEditedTime() {
+        return this.lastEditedTime;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public void setOriginalContentDeleted(Boolean originalContentDeleted) {
+        this.originalContentDeleted = originalContentDeleted;
+    }
+
+    public Boolean getOriginalContentDeleted() {
+        return this.originalContentDeleted;
+    }
+
+    public void setParent(ParentId parent) {
+        this.parent = parent;
+    }
+
+    public ParentId getParent() {
+        return this.parent;
+    }
+
+    public void setRichText(java.util.List<RichText> richText) {
         this.richText = richText;
     }
 
-    @JsonGetter("rich_text")
-    public RichText getRichText() {
+    public java.util.List<RichText> getRichText() {
         return this.richText;
     }
 }

@@ -7,39 +7,40 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of a heading block.")
 public class Heading {
-    private java.util.List<RichText> richText;
+    @JsonProperty("color")
     private String color;
+
+    @JsonProperty("is_toggleable")
     private Boolean isToggleable;
 
-    @JsonSetter("rich_text")
-    public void setRichText(java.util.List<RichText> richText) {
-        this.richText = richText;
-    }
+    @JsonProperty("rich_text")
+    private java.util.List<RichText> richText;
 
-    @JsonGetter("rich_text")
-    public java.util.List<RichText> getRichText() {
-        return this.richText;
-    }
 
-    @JsonSetter("color")
     public void setColor(String color) {
         this.color = color;
     }
 
-    @JsonGetter("color")
     public String getColor() {
         return this.color;
     }
 
-    @JsonSetter("is_toggleable")
     public void setIsToggleable(Boolean isToggleable) {
         this.isToggleable = isToggleable;
     }
 
-    @JsonGetter("is_toggleable")
     public Boolean getIsToggleable() {
         return this.isToggleable;
+    }
+
+    public void setRichText(java.util.List<RichText> richText) {
+        this.richText = richText;
+    }
+
+    public java.util.List<RichText> getRichText() {
+        return this.richText;
     }
 }
 

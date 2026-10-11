@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Numbered list item block.")
 public class BlockNumberedListItem extends Block {
+    @JsonProperty("numbered_list_item")
     private NumberedListItem numberedListItem;
 
-    @JsonSetter("numbered_list_item")
+
     public void setNumberedListItem(NumberedListItem numberedListItem) {
         this.numberedListItem = numberedListItem;
     }
 
-    @JsonGetter("numbered_list_item")
     public NumberedListItem getNumberedListItem() {
         return this.numberedListItem;
     }

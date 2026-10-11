@@ -7,105 +7,199 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("A database: a container for one or more data sources.")
 public class Database {
-    private String object;
-    private String id;
+    @JsonPropertyDescription("The cover of the database.")
+    @JsonProperty("cover")
+    private Cover cover;
+
+    @JsonPropertyDescription("When the database was created.")
+    @JsonProperty("created_time")
     private java.time.LocalDateTime createdTime;
+
+    @JsonPropertyDescription("The data sources of the database.")
+    @JsonProperty("data_sources")
+    private java.util.List<DataSourceReference> dataSources;
+
+    @JsonPropertyDescription("Typed database kind (`tasks`, `projects`, `sprints`, `docs`, `wiki`, `meetings`, `meeting_notes`, `skills`, `github_prs`), or null for a regular database.")
+    @JsonProperty("database_type")
+    private String databaseType;
+
+    @JsonPropertyDescription("The description of the database.")
+    @JsonProperty("description")
+    private java.util.List<RichText> description;
+
+    @JsonPropertyDescription("The icon of the database.")
+    @JsonProperty("icon")
+    private Icon icon;
+
+    @JsonPropertyDescription("The ID of the database.")
+    @JsonProperty("id")
+    private String id;
+
+    @JsonPropertyDescription("Whether the database is in the trash.")
+    @JsonProperty("in_trash")
+    private Boolean inTrash;
+
+    @JsonPropertyDescription("Whether the database is inline.")
+    @JsonProperty("is_inline")
+    private Boolean isInline;
+
+    @JsonPropertyDescription("Whether the database is locked from editing in the Notion app UI.")
+    @JsonProperty("is_locked")
+    private Boolean isLocked;
+
+    @JsonPropertyDescription("When the database was last edited.")
+    @JsonProperty("last_edited_time")
     private java.time.LocalDateTime lastEditedTime;
-    private DatabaseIcon icon;
-    private DatabaseCover cover;
+
+    @JsonPropertyDescription("Always `database`.")
+    @JsonProperty("object")
+    private String object;
+
+    @JsonPropertyDescription("The parent of the database (page, block, workspace, or another database for wikis).")
+    @JsonProperty("parent")
+    private ParentId parent;
+
+    @JsonPropertyDescription("The public URL of the database, if publicly accessible.")
+    @JsonProperty("public_url")
+    private String publicUrl;
+
+    @JsonPropertyDescription("The title of the database.")
+    @JsonProperty("title")
+    private java.util.List<RichText> title;
+
+    @JsonPropertyDescription("The URL of the database.")
+    @JsonProperty("url")
     private String url;
-    private java.util.List<DatabaseTitle> title;
-    private java.util.List<DatabaseTitle> description;
 
-    @JsonSetter("object")
-    public void setObject(String object) {
-        this.object = object;
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
 
-    @JsonGetter("object")
-    public String getObject() {
-        return this.object;
+    public Cover getCover() {
+        return this.cover;
     }
 
-    @JsonSetter("id")
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @JsonGetter("id")
-    public String getId() {
-        return this.id;
-    }
-
-    @JsonSetter("created_time")
     public void setCreatedTime(java.time.LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
-    @JsonGetter("created_time")
     public java.time.LocalDateTime getCreatedTime() {
         return this.createdTime;
     }
 
-    @JsonSetter("last_edited_time")
+    public void setDataSources(java.util.List<DataSourceReference> dataSources) {
+        this.dataSources = dataSources;
+    }
+
+    public java.util.List<DataSourceReference> getDataSources() {
+        return this.dataSources;
+    }
+
+    public void setDatabaseType(String databaseType) {
+        this.databaseType = databaseType;
+    }
+
+    public String getDatabaseType() {
+        return this.databaseType;
+    }
+
+    public void setDescription(java.util.List<RichText> description) {
+        this.description = description;
+    }
+
+    public java.util.List<RichText> getDescription() {
+        return this.description;
+    }
+
+    public void setIcon(Icon icon) {
+        this.icon = icon;
+    }
+
+    public Icon getIcon() {
+        return this.icon;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setInTrash(Boolean inTrash) {
+        this.inTrash = inTrash;
+    }
+
+    public Boolean getInTrash() {
+        return this.inTrash;
+    }
+
+    public void setIsInline(Boolean isInline) {
+        this.isInline = isInline;
+    }
+
+    public Boolean getIsInline() {
+        return this.isInline;
+    }
+
+    public void setIsLocked(Boolean isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    public Boolean getIsLocked() {
+        return this.isLocked;
+    }
+
     public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
     }
 
-    @JsonGetter("last_edited_time")
     public java.time.LocalDateTime getLastEditedTime() {
         return this.lastEditedTime;
     }
 
-    @JsonSetter("icon")
-    public void setIcon(DatabaseIcon icon) {
-        this.icon = icon;
+    public void setObject(String object) {
+        this.object = object;
     }
 
-    @JsonGetter("icon")
-    public DatabaseIcon getIcon() {
-        return this.icon;
+    public String getObject() {
+        return this.object;
     }
 
-    @JsonSetter("cover")
-    public void setCover(DatabaseCover cover) {
-        this.cover = cover;
+    public void setParent(ParentId parent) {
+        this.parent = parent;
     }
 
-    @JsonGetter("cover")
-    public DatabaseCover getCover() {
-        return this.cover;
+    public ParentId getParent() {
+        return this.parent;
     }
 
-    @JsonSetter("url")
+    public void setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
+    public String getPublicUrl() {
+        return this.publicUrl;
+    }
+
+    public void setTitle(java.util.List<RichText> title) {
+        this.title = title;
+    }
+
+    public java.util.List<RichText> getTitle() {
+        return this.title;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonGetter("url")
     public String getUrl() {
         return this.url;
-    }
-
-    @JsonSetter("title")
-    public void setTitle(java.util.List<DatabaseTitle> title) {
-        this.title = title;
-    }
-
-    @JsonGetter("title")
-    public java.util.List<DatabaseTitle> getTitle() {
-        return this.title;
-    }
-
-    @JsonSetter("description")
-    public void setDescription(java.util.List<DatabaseTitle> description) {
-        this.description = description;
-    }
-
-    @JsonGetter("description")
-    public java.util.List<DatabaseTitle> getDescription() {
-        return this.description;
     }
 }
 

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.*;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
+    @JsonSubTypes.Type(value = BlockAudio.class, name = "audio"),
     @JsonSubTypes.Type(value = BlockBookmark.class, name = "bookmark"),
     @JsonSubTypes.Type(value = BlockBreadcrumb.class, name = "breadcrumb"),
     @JsonSubTypes.Type(value = BlockBulletedListItem.class, name = "bulleted_list_item"),
@@ -16,143 +17,156 @@ import com.fasterxml.jackson.annotation.*;
     @JsonSubTypes.Type(value = BlockChildDatabase.class, name = "child_database"),
     @JsonSubTypes.Type(value = BlockChildPage.class, name = "child_page"),
     @JsonSubTypes.Type(value = BlockCode.class, name = "code"),
+    @JsonSubTypes.Type(value = BlockColumn.class, name = "column"),
+    @JsonSubTypes.Type(value = BlockColumnList.class, name = "column_list"),
     @JsonSubTypes.Type(value = BlockDivider.class, name = "divider"),
     @JsonSubTypes.Type(value = BlockEmbed.class, name = "embed"),
     @JsonSubTypes.Type(value = BlockEquation.class, name = "equation"),
     @JsonSubTypes.Type(value = BlockFile.class, name = "file"),
-    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_1"),
-    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_2"),
-    @JsonSubTypes.Type(value = BlockHeading.class, name = "heading_3"),
+    @JsonSubTypes.Type(value = BlockHeadingFour.class, name = "heading_4"),
+    @JsonSubTypes.Type(value = BlockHeadingOne.class, name = "heading_1"),
+    @JsonSubTypes.Type(value = BlockHeadingThree.class, name = "heading_3"),
+    @JsonSubTypes.Type(value = BlockHeadingTwo.class, name = "heading_2"),
     @JsonSubTypes.Type(value = BlockImage.class, name = "image"),
+    @JsonSubTypes.Type(value = BlockLinkPreview.class, name = "link_preview"),
+    @JsonSubTypes.Type(value = BlockLinkToPage.class, name = "link_to_page"),
+    @JsonSubTypes.Type(value = BlockMeetingNotes.class, name = "meeting_notes"),
     @JsonSubTypes.Type(value = BlockNumberedListItem.class, name = "numbered_list_item"),
-    @JsonSubTypes.Type(value = BlockParagraph.class, name = "paragraph"),
     @JsonSubTypes.Type(value = BlockPDF.class, name = "pdf"),
+    @JsonSubTypes.Type(value = BlockParagraph.class, name = "paragraph"),
     @JsonSubTypes.Type(value = BlockQuote.class, name = "quote"),
+    @JsonSubTypes.Type(value = BlockSyncedBlock.class, name = "synced_block"),
+    @JsonSubTypes.Type(value = BlockTab.class, name = "tab"),
+    @JsonSubTypes.Type(value = BlockTable.class, name = "table"),
+    @JsonSubTypes.Type(value = BlockTableOfContents.class, name = "table_of_contents"),
+    @JsonSubTypes.Type(value = BlockTableRow.class, name = "table_row"),
+    @JsonSubTypes.Type(value = BlockTemplate.class, name = "template"),
+    @JsonSubTypes.Type(value = BlockToDo.class, name = "to_do"),
+    @JsonSubTypes.Type(value = BlockToggle.class, name = "toggle"),
+    @JsonSubTypes.Type(value = BlockUnsupported.class, name = "unsupported"),
+    @JsonSubTypes.Type(value = BlockVideo.class, name = "video"),
 })
+@JsonClassDescription("A block object represents a piece of content within Notion.")
 public abstract class Block {
-    private String object;
-    private String id;
-    private ParentId parent;
-    private String type;
-    private java.time.LocalDateTime createdTime;
+    @JsonPropertyDescription("User who created the block.")
+    @JsonProperty("created_by")
     private User createdBy;
-    private java.time.LocalDateTime lastEditedTime;
-    private User lastEditedBy;
-    @JsonPropertyDescription("The archived status of the block")
-    private Boolean archived;
-    @JsonPropertyDescription("Whether the block has been deleted")
-    private Boolean inTrash;
-    @JsonPropertyDescription("Whether or not the block has children blocks nested within it")
+
+    @JsonPropertyDescription("Date and time when this block was created.")
+    @JsonProperty("created_time")
+    private java.time.LocalDateTime createdTime;
+
+    @JsonPropertyDescription("Whether or not the block has children blocks nested within it.")
+    @JsonProperty("has_children")
     private Boolean hasChildren;
 
-    @JsonSetter("object")
-    public void setObject(String object) {
-        this.object = object;
-    }
+    @JsonPropertyDescription("Identifier for the block.")
+    @JsonProperty("id")
+    private String id;
 
-    @JsonGetter("object")
-    public String getObject() {
-        return this.object;
-    }
+    @JsonPropertyDescription("Whether the block is in the trash.")
+    @JsonProperty("in_trash")
+    private Boolean inTrash;
 
-    @JsonSetter("id")
-    public void setId(String id) {
-        this.id = id;
-    }
+    @JsonPropertyDescription("User who last edited the block.")
+    @JsonProperty("last_edited_by")
+    private User lastEditedBy;
 
-    @JsonGetter("id")
-    public String getId() {
-        return this.id;
-    }
+    @JsonPropertyDescription("Date and time when this block was last updated.")
+    @JsonProperty("last_edited_time")
+    private java.time.LocalDateTime lastEditedTime;
 
-    @JsonSetter("parent")
-    public void setParent(ParentId parent) {
-        this.parent = parent;
-    }
+    @JsonPropertyDescription("Always block.")
+    @JsonProperty("object")
+    private String object;
 
-    @JsonGetter("parent")
-    public ParentId getParent() {
-        return this.parent;
-    }
+    @JsonPropertyDescription("Information about the block's parent.")
+    @JsonProperty("parent")
+    private ParentId parent;
 
-    @JsonSetter("type")
-    public void setType(String type) {
-        this.type = type;
-    }
+    @JsonPropertyDescription("Type of block.")
+    @JsonProperty("type")
+    private String type;
 
-    @JsonGetter("type")
-    public String getType() {
-        return this.type;
-    }
 
-    @JsonSetter("created_time")
-    public void setCreatedTime(java.time.LocalDateTime createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    @JsonGetter("created_time")
-    public java.time.LocalDateTime getCreatedTime() {
-        return this.createdTime;
-    }
-
-    @JsonSetter("created_by")
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 
-    @JsonGetter("created_by")
     public User getCreatedBy() {
         return this.createdBy;
     }
 
-    @JsonSetter("last_edited_time")
-    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
-        this.lastEditedTime = lastEditedTime;
+    public void setCreatedTime(java.time.LocalDateTime createdTime) {
+        this.createdTime = createdTime;
     }
 
-    @JsonGetter("last_edited_time")
-    public java.time.LocalDateTime getLastEditedTime() {
-        return this.lastEditedTime;
+    public java.time.LocalDateTime getCreatedTime() {
+        return this.createdTime;
     }
 
-    @JsonSetter("last_edited_by")
-    public void setLastEditedBy(User lastEditedBy) {
-        this.lastEditedBy = lastEditedBy;
-    }
-
-    @JsonGetter("last_edited_by")
-    public User getLastEditedBy() {
-        return this.lastEditedBy;
-    }
-
-    @JsonSetter("archived")
-    public void setArchived(Boolean archived) {
-        this.archived = archived;
-    }
-
-    @JsonGetter("archived")
-    public Boolean getArchived() {
-        return this.archived;
-    }
-
-    @JsonSetter("in_trash")
-    public void setInTrash(Boolean inTrash) {
-        this.inTrash = inTrash;
-    }
-
-    @JsonGetter("in_trash")
-    public Boolean getInTrash() {
-        return this.inTrash;
-    }
-
-    @JsonSetter("has_children")
     public void setHasChildren(Boolean hasChildren) {
         this.hasChildren = hasChildren;
     }
 
-    @JsonGetter("has_children")
     public Boolean getHasChildren() {
         return this.hasChildren;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setInTrash(Boolean inTrash) {
+        this.inTrash = inTrash;
+    }
+
+    public Boolean getInTrash() {
+        return this.inTrash;
+    }
+
+    public void setLastEditedBy(User lastEditedBy) {
+        this.lastEditedBy = lastEditedBy;
+    }
+
+    public User getLastEditedBy() {
+        return this.lastEditedBy;
+    }
+
+    public void setLastEditedTime(java.time.LocalDateTime lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+    }
+
+    public java.time.LocalDateTime getLastEditedTime() {
+        return this.lastEditedTime;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public void setParent(ParentId parent) {
+        this.parent = parent;
+    }
+
+    public ParentId getParent() {
+        return this.parent;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

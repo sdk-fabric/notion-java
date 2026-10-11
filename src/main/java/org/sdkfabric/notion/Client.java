@@ -34,9 +34,18 @@ public class Client extends ClientAbstract {
         super(baseUrl, credentials);
     }
 
-    public UserTag user()
+    public BlockTag block()
     {
-        return new UserTag(
+        return new BlockTag(
+            this.httpClient,
+            this.objectMapper,
+            this.parser
+        );
+    }
+
+    public DataSourceTag dataSource()
+    {
+        return new DataSourceTag(
             this.httpClient,
             this.objectMapper,
             this.parser
@@ -61,15 +70,24 @@ public class Client extends ClientAbstract {
         );
     }
 
+    public UserTag user()
+    {
+        return new UserTag(
+            this.httpClient,
+            this.objectMapper,
+            this.parser
+        );
+    }
+
 
 
     public static Client build(String token) throws InvalidCredentialsException
     {
-        return new Client("https://api.notion.com", new HttpBearer(token));
+        return new Client("https://api.notion.com/v1", new HttpBearer(token));
     }
 
     public static Client buildAnonymous() throws InvalidCredentialsException
     {
-        return new Client("https://api.notion.com", new Anonymous());
+        return new Client("https://api.notion.com/v1", new Anonymous());
     }
 }

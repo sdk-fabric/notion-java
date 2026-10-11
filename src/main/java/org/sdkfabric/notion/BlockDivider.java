@@ -7,6 +7,19 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Divider block.")
 public class BlockDivider extends Block {
+    @JsonPropertyDescription("Always an empty object.")
+    @JsonProperty("divider")
+    private EmptyObject divider;
+
+
+    public void setDivider(EmptyObject divider) {
+        this.divider = divider;
+    }
+
+    public EmptyObject getDivider() {
+        return this.divider;
+    }
 }
 

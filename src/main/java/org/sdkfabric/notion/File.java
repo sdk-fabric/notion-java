@@ -7,39 +7,79 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("File object used by image, video, pdf, file and audio blocks, and by files property values.")
 public class File {
+    @JsonPropertyDescription("Caption of the media block.")
+    @JsonProperty("caption")
     private java.util.List<RichText> caption;
+
+    @JsonPropertyDescription("External file URL, when type is external.")
+    @JsonProperty("external")
+    private ExternalObject external;
+
+    @JsonPropertyDescription("Notion-hosted file, when type is file.")
+    @JsonProperty("file")
     private FileObject file;
+
+    @JsonPropertyDescription("Uploaded file, when type is file_upload.")
+    @JsonProperty("file_upload")
+    private IdReference fileUpload;
+
+    @JsonPropertyDescription("Name of the file (file blocks and files properties).")
+    @JsonProperty("name")
     private String name;
 
-    @JsonSetter("caption")
+    @JsonPropertyDescription("file (Notion-hosted), external or file_upload (request only).")
+    @JsonProperty("type")
+    private String type;
+
+
     public void setCaption(java.util.List<RichText> caption) {
         this.caption = caption;
     }
 
-    @JsonGetter("caption")
     public java.util.List<RichText> getCaption() {
         return this.caption;
     }
 
-    @JsonSetter("file")
+    public void setExternal(ExternalObject external) {
+        this.external = external;
+    }
+
+    public ExternalObject getExternal() {
+        return this.external;
+    }
+
     public void setFile(FileObject file) {
         this.file = file;
     }
 
-    @JsonGetter("file")
     public FileObject getFile() {
         return this.file;
     }
 
-    @JsonSetter("name")
+    public void setFileUpload(IdReference fileUpload) {
+        this.fileUpload = fileUpload;
+    }
+
+    public IdReference getFileUpload() {
+        return this.fileUpload;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    @JsonGetter("name")
     public String getName() {
         return this.name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

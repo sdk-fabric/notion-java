@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Emoji icon.")
 public class EmojiIcon extends Icon {
+    @JsonProperty("emoji")
     private String emoji;
 
-    @JsonSetter("emoji")
+
     public void setEmoji(String emoji) {
         this.emoji = emoji;
     }
 
-    @JsonGetter("emoji")
     public String getEmoji() {
         return this.emoji;
     }

@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Bulleted list item block.")
 public class BlockBulletedListItem extends Block {
+    @JsonProperty("bulleted_list_item")
     private BulletedListItem bulletedListItem;
 
-    @JsonSetter("bulleted_list_item")
+
     public void setBulletedListItem(BulletedListItem bulletedListItem) {
         this.bulletedListItem = bulletedListItem;
     }
 
-    @JsonGetter("bulleted_list_item")
     public BulletedListItem getBulletedListItem() {
         return this.bulletedListItem;
     }

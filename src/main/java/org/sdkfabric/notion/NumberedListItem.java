@@ -8,38 +8,62 @@ package org.sdkfabric.notion;
 import com.fasterxml.jackson.annotation.*;
 
 public class NumberedListItem {
-    private java.util.List<RichText> richText;
-    private String color;
+    @JsonProperty("children")
     private java.util.List<Block> children;
 
-    @JsonSetter("rich_text")
-    public void setRichText(java.util.List<RichText> richText) {
-        this.richText = richText;
-    }
+    @JsonProperty("color")
+    private String color;
 
-    @JsonGetter("rich_text")
-    public java.util.List<RichText> getRichText() {
-        return this.richText;
-    }
+    @JsonPropertyDescription("numbers, letters or roman.")
+    @JsonProperty("list_format")
+    private String listFormat;
 
-    @JsonSetter("color")
-    public void setColor(String color) {
-        this.color = color;
-    }
+    @JsonPropertyDescription("Start number of the list.")
+    @JsonProperty("list_start_index")
+    private Integer listStartIndex;
 
-    @JsonGetter("color")
-    public String getColor() {
-        return this.color;
-    }
+    @JsonProperty("rich_text")
+    private java.util.List<RichText> richText;
 
-    @JsonSetter("children")
+
     public void setChildren(java.util.List<Block> children) {
         this.children = children;
     }
 
-    @JsonGetter("children")
     public java.util.List<Block> getChildren() {
         return this.children;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setListFormat(String listFormat) {
+        this.listFormat = listFormat;
+    }
+
+    public String getListFormat() {
+        return this.listFormat;
+    }
+
+    public void setListStartIndex(Integer listStartIndex) {
+        this.listStartIndex = listStartIndex;
+    }
+
+    public Integer getListStartIndex() {
+        return this.listStartIndex;
+    }
+
+    public void setRichText(java.util.List<RichText> richText) {
+        this.richText = richText;
+    }
+
+    public java.util.List<RichText> getRichText() {
+        return this.richText;
     }
 }
 

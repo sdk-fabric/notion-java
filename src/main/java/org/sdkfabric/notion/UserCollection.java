@@ -7,39 +7,67 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Paginated list of users.")
 public class UserCollection {
-    private java.util.List<User> results;
-    private String nextCursor;
+    @JsonPropertyDescription("Whether more results are available.")
+    @JsonProperty("has_more")
     private Boolean hasMore;
 
-    @JsonSetter("results")
-    public void setResults(java.util.List<User> results) {
-        this.results = results;
-    }
+    @JsonPropertyDescription("Cursor for the next page of results.")
+    @JsonProperty("next_cursor")
+    private String nextCursor;
 
-    @JsonGetter("results")
-    public java.util.List<User> getResults() {
-        return this.results;
-    }
+    @JsonPropertyDescription("Always \"list\".")
+    @JsonProperty("object")
+    private String object;
 
-    @JsonSetter("next_cursor")
-    public void setNextCursor(String nextCursor) {
-        this.nextCursor = nextCursor;
-    }
+    @JsonPropertyDescription("List of users.")
+    @JsonProperty("results")
+    private java.util.List<User> results;
 
-    @JsonGetter("next_cursor")
-    public String getNextCursor() {
-        return this.nextCursor;
-    }
+    @JsonPropertyDescription("Always \"user\".")
+    @JsonProperty("type")
+    private String type;
 
-    @JsonSetter("has_more")
+
     public void setHasMore(Boolean hasMore) {
         this.hasMore = hasMore;
     }
 
-    @JsonGetter("has_more")
     public Boolean getHasMore() {
         return this.hasMore;
+    }
+
+    public void setNextCursor(String nextCursor) {
+        this.nextCursor = nextCursor;
+    }
+
+    public String getNextCursor() {
+        return this.nextCursor;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getObject() {
+        return this.object;
+    }
+
+    public void setResults(java.util.List<User> results) {
+        this.results = results;
+    }
+
+    public java.util.List<User> getResults() {
+        return this.results;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 }
 

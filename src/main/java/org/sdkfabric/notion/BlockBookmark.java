@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Bookmark block.")
 public class BlockBookmark extends Block {
+    @JsonProperty("bookmark")
     private Bookmark bookmark;
 
-    @JsonSetter("bookmark")
+
     public void setBookmark(Bookmark bookmark) {
         this.bookmark = bookmark;
     }
 
-    @JsonGetter("bookmark")
     public Bookmark getBookmark() {
         return this.bookmark;
     }

@@ -7,15 +7,29 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Content of an embed block.")
 public class Embed {
+    @JsonPropertyDescription("Caption of the embed.")
+    @JsonProperty("caption")
+    private java.util.List<RichText> caption;
+
+    @JsonPropertyDescription("The URL of the embedded content.")
+    @JsonProperty("url")
     private String url;
 
-    @JsonSetter("url")
+
+    public void setCaption(java.util.List<RichText> caption) {
+        this.caption = caption;
+    }
+
+    public java.util.List<RichText> getCaption() {
+        return this.caption;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @JsonGetter("url")
     public String getUrl() {
         return this.url;
     }

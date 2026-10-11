@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Callout block.")
 public class BlockCallout extends Block {
+    @JsonProperty("callout")
     private Callout callout;
 
-    @JsonSetter("callout")
+
     public void setCallout(Callout callout) {
         this.callout = callout;
     }
 
-    @JsonGetter("callout")
     public Callout getCallout() {
         return this.callout;
     }

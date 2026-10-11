@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Parent is a block.")
 public class BlockParentId extends ParentId {
+    @JsonProperty("block_id")
     private String blockId;
 
-    @JsonSetter("block_id")
+
     public void setBlockId(String blockId) {
         this.blockId = blockId;
     }
 
-    @JsonGetter("block_id")
     public String getBlockId() {
         return this.blockId;
     }

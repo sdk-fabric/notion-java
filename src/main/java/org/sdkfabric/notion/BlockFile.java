@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("File block.")
 public class BlockFile extends Block {
+    @JsonProperty("file")
     private File file;
 
-    @JsonSetter("file")
+
     public void setFile(File file) {
         this.file = file;
     }
 
-    @JsonGetter("file")
     public File getFile() {
         return this.file;
     }

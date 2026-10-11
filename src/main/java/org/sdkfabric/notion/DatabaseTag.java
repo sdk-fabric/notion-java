@@ -34,7 +34,49 @@ public class DatabaseTag extends TagAbstract {
 
 
     /**
-     * Retrieves a database object — information that describes the structure and columns of a database — for a provided database ID. The response adheres to any limits to an integration’s capabilities.
+     * Creates a database and its initial data source as a child of a page or the workspace.
+     */
+    public Database create(CreateDatabaseRequest payload) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+
+            Map<String, Object> queryParams = new HashMap<>();
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/databases", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpPost request = new HttpPost(builder.build());
+            request.setEntity(new StringEntity(this.objectMapper.writeValueAsString(payload), ContentType.APPLICATION_JSON));
+
+            request.setHeader("Content-Type", "application/json");
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Database>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Retrieves a database object, a container for one or more data sources, for a provided database ID. Use Retrieve a data source to read its property schema.
      */
     public Database get(String databaseId) throws ClientException {
         try {
@@ -45,11 +87,54 @@ public class DatabaseTag extends TagAbstract {
 
             List<String> queryStructNames = new ArrayList<>();
 
-            URIBuilder builder = new URIBuilder(this.parser.url("/v1/databases/:database_id", pathParams));
+            URIBuilder builder = new URIBuilder(this.parser.url("/databases/:database_id", pathParams));
             this.parser.query(builder, queryParams, queryStructNames);
 
             HttpGet request = new HttpGet(builder.build());
 
+
+            return this.httpClient.execute(request, response -> {
+                if (response.getCode() >= 200 && response.getCode() <= 299) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Database>(){});
+
+                    return data;
+                }
+
+                var statusCode = response.getCode();
+                if (statusCode >= 0 && statusCode <= 999) {
+                    var data = this.parser.parse(EntityUtils.toString(response.getEntity()), new TypeReference<Error>(){});
+
+                    throw new ErrorException(data);
+                }
+
+                throw new UnknownStatusCodeException("The server returned an unknown status code: " + statusCode);
+            });
+        } catch (ClientException e) {
+            throw e;
+        } catch (URISyntaxException | IOException e) {
+            throw new ClientException("An unknown error occurred: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Updates the attributes (title, description, icon, cover, parent, inline, trash and lock status) of a database.
+     */
+    public Database update(String databaseId, UpdateDatabaseRequest payload) throws ClientException {
+        try {
+            Map<String, Object> pathParams = new HashMap<>();
+            pathParams.put("database_id", databaseId);
+
+            Map<String, Object> queryParams = new HashMap<>();
+
+            List<String> queryStructNames = new ArrayList<>();
+
+            URIBuilder builder = new URIBuilder(this.parser.url("/databases/:database_id", pathParams));
+            this.parser.query(builder, queryParams, queryStructNames);
+
+            HttpPatch request = new HttpPatch(builder.build());
+            request.setEntity(new StringEntity(this.objectMapper.writeValueAsString(payload), ContentType.APPLICATION_JSON));
+
+            request.setHeader("Content-Type", "application/json");
 
             return this.httpClient.execute(request, response -> {
                 if (response.getCode() >= 200 && response.getCode() <= 299) {

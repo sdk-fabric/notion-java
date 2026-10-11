@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Parent is the workspace.")
 public class WorkspaceParentId extends ParentId {
+    @JsonProperty("workspace")
     private Boolean workspace;
 
-    @JsonSetter("workspace")
+
     public void setWorkspace(Boolean workspace) {
         this.workspace = workspace;
     }
 
-    @JsonGetter("workspace")
     public Boolean getWorkspace() {
         return this.workspace;
     }

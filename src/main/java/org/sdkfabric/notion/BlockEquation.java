@@ -7,15 +7,16 @@ package org.sdkfabric.notion;
 
 import com.fasterxml.jackson.annotation.*;
 
+@JsonClassDescription("Equation block.")
 public class BlockEquation extends Block {
+    @JsonProperty("equation")
     private Equation equation;
 
-    @JsonSetter("equation")
+
     public void setEquation(Equation equation) {
         this.equation = equation;
     }
 
-    @JsonGetter("equation")
     public Equation getEquation() {
         return this.equation;
     }
